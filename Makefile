@@ -1,10 +1,8 @@
+obj-m = hello_kernel.o
 KERNEL_DIR = /lib/modules/$(shell uname -r)/build
-PWD := $(shell pwd)
 
-obj-m += hello_kernel.o
-
-default:
-	$(MAKE) -C $(KERNEL_DIR) SUBDIRS=$(PWD) modules
+all:
+	$(MAKE) -C $(KERNEL_DIR) M=$(shell pwd) modules
 
 clean:
-	$(MAKE) -C $(KERNEL_DIR) SUBDIRS=$(PWD) clean
+	$(MAKE) -C $(KERNEL_DIR) M=$(shell pwd) clean
